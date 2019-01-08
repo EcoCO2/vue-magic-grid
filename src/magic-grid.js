@@ -22,6 +22,10 @@ export default {
     animate: {
       type: Boolean, // Animate item positioning. Default: false.
       default: true
+    },
+    autoRefresh: {
+      type: Boolean, // Optional, if set to true, automatically reposition items in the grid. Default to true.
+      default: true
     }
   },
 
@@ -42,7 +46,9 @@ export default {
         this.positionItems()
 
         window.addEventListener('resize', () => {
-          setTimeout(this.positionItems(), 200)
+          if (this.autoRefresh) {
+            setTimeout(this.positionItems(), 200)
+          }
         })
       } else this.getReady()
     },
